@@ -1,5 +1,3 @@
-.PHONY: build init run exec new stop generate rm
-
 .DEFAULT_GOAL := run
 VPATH         := dockerfile
 BUILD         := .build
@@ -32,6 +30,7 @@ define docker-container-stop
   fi
 endef
 
+.PHONY: build
 build: $(BUILD)
 
 .build: Dockerfile
@@ -42,6 +41,7 @@ build: $(BUILD)
 	docker build -t $(IMAGE) .
 	@touch $@
 
+.PHONY: init
 init: $(BUILD)
 ifeq "$(wildcard $(CONFIG_TOML))" ""
 	docker container run --rm \
@@ -61,6 +61,7 @@ ifeq "$(wildcard $(CONFIG_TOML))" ""
 	  $(VOL_SOURCE)/$(FQDN)/
 endif
 
+.PHONY: run
 run: init
 	if ! docker container inspect $(CONTAINER) > /dev/null 2>&1 ; then \
 	  docker container run --rm -d \
@@ -73,13 +74,16 @@ run: init
 
 	@echo you can access your blog at http://localhost:1313
 
+.PHONY: exec
 exec: run
 	docker container exec -it $(CONTAINER) /bin/sh
 
+.PHONY: generate
 generate: run
 	docker container exec $(CONTAINER) hugo -d ../../output
 	@echo building static pages in $(VOL_OUTPUT)
 
+.PHONY: new
 new: run
 ifndef PAGE
 	$(error PAGE variable is not defined, run the followin command: make new PAGE=new.md)
@@ -92,8 +96,10 @@ else
 	@echo $(PAGE) already exists
 endif
 
+.PHONY: stop
 stop:
 	$(call docker-container-stop)
 
+.PHONY: rm
 rm: stop
 	$(call docker-image-rm)
