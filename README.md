@@ -5,7 +5,7 @@ Run Hugo in a container
 Docker
 
 # Usage
-I wrote a Makefile for handling the life cycles of images and containers, the
+I wrote a Makefile for handling the life cycle of images and containers, the
 syntax is as follows:
 
 ## Building the image
@@ -23,16 +23,16 @@ you can override the both volumes by using the following variables:
     $ make VOL_SOURCE=~/source VOL_OUTPUT=~/output run
 
 ## Getting a shell access to the running container
-    $ make exec
+    $ make shell
 
 ## Creating a new content file
     $ make new PAGE=post/my-first-post.md
 
 ## Building static pages from markdown files
-    $ make generate
+    $ make static
 
 ## Stopping the container
     $ make stop
 
 ## Removing the image
-    $ make rm
+    $ make clean
