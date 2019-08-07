@@ -95,9 +95,9 @@ static: run ## Build static pages
 	@echo building static pages in $(VOL_OUTPUT)
 
 .PHONY: new
-new: run ## Add new page: make new post/page.md
+new: run ## Add new page: make new PAGE=post/new.md
 ifndef PAGE
-	$(error PAGE variable is not defined, run the following command: make new PAGE=new.md)
+	$(error PAGE variable is not defined, run the following command: make new PAGE=post/new.md)
 endif
 
 ifeq "$(wildcard $(VOL_SOURCE)/$(FQDN)/content/$(PAGE))" ""
