@@ -5,8 +5,11 @@ Run Hugo in a container
 Docker
 
 # Usage
-I wrote a Makefile for handling the life cycle of images and containers, the
+I wrote a Makefile to handle the life cycle of images and containers, the
 syntax is as follows:
+
+## Getting help
+    $ make help
 
 ## Building the image
     $ make build
@@ -17,7 +20,7 @@ syntax is as follows:
 It will spin up a webserver, you can access it at http://localhost:1313  
 By default the volume of your markdown source is located in
 ~/github/hugo-richardpct.github.io/source on your host, and the volume of
-the static files building by Hugo is located in ~/github/richardpct.github.io,
+the static files built by Hugo is located in ~/github/richardpct.github.io,
 you can override the both volumes by using the following variables:
 
     $ make VOL_SOURCE=~/source VOL_OUTPUT=~/output run
