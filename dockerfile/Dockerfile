@@ -2,7 +2,7 @@ FROM alpine:latest
 
 LABEL maintainer="richardpct"
 
-ENV VERSION 0.56.3
+ENV VERSION 0.59.1
 
 RUN mkdir /tmp/hugo && \
     wget https://github.com/gohugoio/hugo/releases/download/v${VERSION}/hugo_${VERSION}_Linux-64bit.tar.gz \
